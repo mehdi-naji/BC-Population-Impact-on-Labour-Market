@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface": "#f7fafc",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#649ee5",
+                        "secondary-fixed-dim": "#bdc7dc",
+                        "surface-container-low": "#f1f4f6",
+                        "secondary-fixed": "#d9e3f9",
+                        "on-surface-variant": "#43474f",
+                        "on-primary-fixed-variant": "#1f477b",
+                        "tertiary-fixed-dim": "#a2c9ff",
+                        "surface-variant": "#e0e3e5",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-tertiary-fixed": "#001c38",
+                        "on-surface": "#181c1e",
+                        "surface-dim": "#d7dadc",
+                        "tertiary": "#001f3c",
+                        "on-primary-container": "#799dd6",
+                        "surface-container-lowest": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#a7c8ff",
+                        "tertiary-fixed": "#d3e4ff",
+                        "tertiary-container": "#003460",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary-fixed-variant": "#3d4759",
+                        "inverse-on-surface": "#eef1f3",
+                        "on-tertiary-fixed-variant": "#004881",
+                        "background": "#f7fafc",
+                        "surface-tint": "#3a5f94",
+                        "on-primary-fixed": "#001b3c",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "surface-bright": "#f7fafc",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#596376",
+                        "secondary": "#555f71",
+                        "inverse-surface": "#2d3133",
+                        "primary-container": "#003366",
+                        "secondary-container": "#d6e0f6",
+                        "outline-variant": "#c3c6d1",
+                        "surface-container-high": "#e5e9eb",
+                        "primary-fixed": "#d5e3ff",
+                        "primary": "#001e40",
+                        "error-container": "#ffdad6",
+                        "outline": "#737780",
+                        "surface-container": "#ebeef0",
+                        "on-background": "#181c1e",
+                        "on-secondary-fixed": "#121c2c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "xs": "8px",
+                        "sm": "16px",
+                        "md": "24px",
+                        "gutter": "24px",
+                        "margin-page": "40px",
+                        "lg": "32px",
+                        "xl": "48px",
+                        "base": "4px"
+                    },
+                    "fontFamily": {
+                        "data-point": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "h2-section": ["Public Sans"],
+                        "takeaway-text": ["Public Sans"],
+                        "body-main": ["Public Sans"],
+                        "display-lg": ["Public Sans"],
+                        "h1-executive": ["Public Sans"]
+                    },
+                    "fontSize": {
+                        "data-point": ["24px", {"lineHeight": "1", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                        "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h2-section": ["20px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "takeaway-text": ["14px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "body-main": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "display-lg": ["36px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "h1-executive": ["28px", {"lineHeight": "1.3", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-surface font-body-main text-on-surface">
+<!-- SideNavBar Shell -->
+<nav class="fixed left-0 top-0 h-full w-[280px] border-r border-slate-200/10 bg-[#003366]/90 backdrop-blur-md dark:bg-slate-900/95 shadow-2xl flex flex-col h-screen py-8 z-50">
+<div class="px-8 mb-10 flex items-center gap-3">
+<div class="w-10 h-10 bg-white/10 rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
+</div>
+<div>
+<h1 class="text-xl font-bold tracking-tighter text-white">WorkBC Executive</h1>
+<p class="text-[10px] uppercase tracking-widest text-blue-300 font-semibold">Economic Intelligence</p>
+</div>
+</div>
+<div class="flex-1 space-y-1">
+<!-- Navigation Items Mapping -->
+<a class="flex items-center gap-4 text-white bg-white/10 font-semibold border-l-4 border-blue-400 px-6 py-3 transition-all translate-x-1" href="#">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="font-['Public_Sans'] antialiased text-sm tracking-tight">Population Drivers</span>
+</a>
+<a class="flex items-center gap-4 text-slate-300 hover:text-white px-6 py-3 transition-colors hover:bg-white/5 group" href="#">
+<span class="material-symbols-outlined transition-transform group-hover:scale-110" data-icon="work">work</span>
+<span class="font-['Public_Sans'] antialiased text-sm tracking-tight">Labour Market Impacts</span>
+</a>
+<a class="flex items-center gap-4 text-slate-300 hover:text-white px-6 py-3 transition-colors hover:bg-white/5 group" href="#">
+<span class="material-symbols-outlined transition-transform group-hover:scale-110" data-icon="analytics">analytics</span>
+<span class="font-['Public_Sans'] antialiased text-sm tracking-tight">WorkBC Program Impacts</span>
+</a>
+<a class="flex items-center gap-4 text-slate-300 hover:text-white px-6 py-3 transition-colors hover:bg-white/5 group" href="#">
+<span class="material-symbols-outlined transition-transform group-hover:scale-110" data-icon="trending_up">trending_up</span>
+<span class="font-['Public_Sans'] antialiased text-sm tracking-tight">Future Trends</span>
+</a>
+</div>
+<div class="mt-auto px-6 pt-8 border-t border-white/10">
+<div class="flex items-center gap-3 bg-white/5 p-3 rounded-lg">
+<img alt="Executive User Profile" class="w-10 h-10 rounded-full border border-white/20" data-alt="professional portrait of a government official in a corporate setting with soft warm background lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXPkpHeJdrXk31BomORJOPYYAuG9OJNBT4N__xkLH7_bVPk9UQv4LS3xC_nnxDP2jZuTApjRv1eHXLlP3iygjcITCXCkwJozxTNTJMmpCb1RcpUambsbpBdQfy-UTKAHF8QFpeGdoktQAVGJzas6QFjKIyxxqtt5moF3cveOCFHkUbPytZYayermD05QW7fA3kttnFCEBgnk8SY1QuJ8J7bc2anTwCk3Eiznn3sBSSNpX-tUkRaG3fNSDWFdgg5I46pf5B1sjSrCk"/>
+<div class="overflow-hidden">
+<p class="text-xs font-bold text-white truncate">Executive User</p>
+<p class="text-[10px] text-slate-400 truncate">Strategic Lead</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- TopAppBar Shell -->
+<header class="docked full-width top-0 sticky z-40 bg-[#F7FAFC] dark:bg-slate-950 border-b border-slate-200 dark:border-slate-800 flex justify-between items-center h-16 px-8 ml-[280px] max-w-[1600px]">
+<div class="flex items-center gap-6">
+<span class="text-lg font-black text-[#003366] dark:text-white uppercase tracking-widest">Strategic Insights Dashboard</span>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden lg:block">
+<input class="bg-surface-container border-none text-sm rounded-full pl-10 pr-4 py-2 w-64 focus:ring-1 focus:ring-primary" placeholder="Search data points..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-2 text-slate-400 text-sm" data-icon="search">search</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-500 hover:text-[#003366] dark:hover:text-blue-300 cursor-pointer transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="text-slate-500 hover:text-[#003366] dark:hover:text-blue-300 cursor-pointer transition-colors duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-800"></div>
+<img alt="Executive Avatar" class="h-8 w-8 rounded-full" data-alt="close-up portrait of a professional woman with a confident expression in a bright modern office" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCTa38JXuCOUqJY5lcwiFC1J5-Pehu6_admqCxCIyiezPIEJuKhVgM8fxVNgrVh3a5Xqh_VAt2wKap5IsFAD8fk6MjmANLxSy83YrdI3oZ0XQfP1QVYSlB1VRe1_EdGOxfFSTL6F2TIEIwR95wUGQ0D8KssD3EO8LgUHxTficxwFwzOQSCqHi6NWbLY0Wi7WslHzawosDCqD8_3bXSbvaLaksQrMvMyGidLlRJLC-uLm-Hf814Lw9jvaYUnLLZdCnDYVFeihXZmp9k"/>
+</div>
+</div>
+</header>
+<!-- Main Content Area -->
+<main class="ml-[280px] max-w-[1600px] p-margin-page">
+<!-- Executive Summary Header -->
+<section class="mb-lg">
+<div class="flex items-center justify-between mb-sm">
+<div>
+<span class="font-label-caps text-label-caps text-primary uppercase tracking-widest mb-1 block">Population Analytics</span>
+<h2 class="font-h1-executive text-h1-executive text-[#001e40]">Shift in Population Drivers</h2>
+</div>
+<div class="flex gap-3">
+<button class="px-sm py-2 border border-outline rounded-lg flex items-center gap-2 font-medium text-sm hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined text-base" data-icon="download">download</span> Export PDF
+                    </button>
+<button class="px-sm py-2 bg-primary-container text-white rounded-lg flex items-center gap-2 font-medium text-sm hover:opacity-90 transition-all shadow-md">
+<span class="material-symbols-outlined text-base" data-icon="share">share</span> Share Briefing
+                    </button>
+</div>
+</div>
+<div class="bg-white border border-slate-200 p-md rounded-xl shadow-sm">
+<div class="flex items-start gap-md">
+<div class="p-3 bg-primary-fixed-dim rounded-lg">
+<span class="material-symbols-outlined text-primary text-2xl" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+</div>
+<div>
+<p class="font-body-main text-body-main text-on-surface-variant max-w-4xl">
+                            British Columbia is experiencing a significant shift in demographic trends. Natural growth is plateauing while international migration has surged to record levels, now accounting for over 90% of total population growth. This executive summary tracks the velocity of these changes and their direct implications for provincial infrastructure and labor supply forecasts.
+                        </p>
+</div>
+</div>
+</div>
+</section>
+<!-- KPI Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-gutter mb-lg">
+<div class="bg-white border border-slate-200 p-md rounded-lg flex flex-col gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Net Migration 2023</span>
+<span class="font-data-point text-data-point text-primary">+128,450</span>
+<span class="text-xs text-green-600 flex items-center gap-1 font-semibold mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span> 12.4% vs LY
+                </span>
+</div>
+<div class="bg-white border border-slate-200 p-md rounded-lg flex flex-col gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Natural Increase</span>
+<span class="font-data-point text-data-point text-primary">-1,240</span>
+<span class="text-xs text-error flex items-center gap-1 font-semibold mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="trending_down">trending_down</span> -0.8% vs LY
+                </span>
+</div>
+<div class="bg-white border border-slate-200 p-md rounded-lg flex flex-col gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Top Driver</span>
+<span class="font-data-point text-data-point text-primary">International</span>
+<span class="text-xs text-on-surface-variant flex items-center gap-1 font-semibold mt-1">
+                    92% Contribution
+                </span>
+</div>
+<div class="bg-white border border-slate-200 p-md rounded-lg flex flex-col gap-1">
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase">Forecast Variance</span>
+<span class="font-data-point text-data-point text-primary">High Alert</span>
+<span class="text-xs text-amber-600 flex items-center gap-1 font-semibold mt-1">
+<span class="material-symbols-outlined text-sm" data-icon="warning">warning</span> +15% over baseline
+                </span>
+</div>
+</div>
+<!-- Bento Grid Insights -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- 1. BC Population Change by Driver (Stacked Column) -->
+<div class="col-span-12 lg:col-span-8 bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col">
+<div class="p-md border-b border-slate-100 flex justify-between items-center">
+<div>
+<h3 class="font-h2-section text-h2-section text-on-surface">BC Population Change by Driver</h3>
+<p class="text-xs text-on-surface-variant">Annual components of growth (2018 - 2023)</p>
+</div>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-container rounded text-[10px] font-bold text-on-surface-variant">YEARLY</span>
+</div>
+</div>
+<!-- Chart Placeholder -->
+<div class="flex-1 min-h-[300px] bg-slate-50 relative p-md flex items-end justify-between gap-4">
+<div class="w-full flex flex-col gap-1 h-full">
+<div class="flex-1 flex items-end gap-2 px-4">
+<!-- Column 1 -->
+<div class="flex-1 flex flex-col gap-1 h-full justify-end">
+<div class="w-full bg-primary-container h-[20%] rounded-t-sm" title="International"></div>
+<div class="w-full bg-on-tertiary-container h-[10%] rounded-sm" title="Interprovincial"></div>
+<div class="w-full bg-slate-300 h-[5%] rounded-b-sm" title="Natural"></div>
+<span class="text-[10px] text-center mt-2 text-on-surface-variant">2019</span>
+</div>
+<!-- Column 2 -->
+<div class="flex-1 flex flex-col gap-1 h-full justify-end">
+<div class="w-full bg-primary-container h-[25%] rounded-t-sm" title="International"></div>
+<div class="w-full bg-on-tertiary-container h-[12%] rounded-sm" title="Interprovincial"></div>
+<div class="w-full bg-slate-300 h-[4%] rounded-b-sm" title="Natural"></div>
+<span class="text-[10px] text-center mt-2 text-on-surface-variant">2020</span>
+</div>
+<!-- Column 3 -->
+<div class="flex-1 flex flex-col gap-1 h-full justify-end">
+<div class="w-full bg-primary-container h-[35%] rounded-t-sm" title="International"></div>
+<div class="w-full bg-on-tertiary-container h-[8%] rounded-sm" title="Interprovincial"></div>
+<div class="w-full bg-slate-300 h-[2%] rounded-b-sm" title="Natural"></div>
+<span class="text-[10px] text-center mt-2 text-on-surface-variant">2021</span>
+</div>
+<!-- Column 4 -->
+<div class="flex-1 flex flex-col gap-1 h-full justify-end">
+<div class="w-full bg-primary-container h-[55%] rounded-t-sm" title="International"></div>
+<div class="w-full bg-on-tertiary-container h-[15%] rounded-sm" title="Interprovincial"></div>
+<div class="w-full bg-slate-200 h-[1%] rounded-b-sm" title="Natural"></div>
+<span class="text-[10px] text-center mt-2 text-on-surface-variant">2022</span>
+</div>
+<!-- Column 5 -->
+<div class="flex-1 flex flex-col gap-1 h-full justify-end">
+<div class="w-full bg-primary-container h-[85%] rounded-t-sm" title="International"></div>
+<div class="w-full bg-on-tertiary-container h-[5%] rounded-sm" title="Interprovincial"></div>
+<div class="w-full bg-slate-100 h-[0.5%] rounded-b-sm" title="Natural"></div>
+<span class="text-[10px] text-center mt-2 text-on-surface-variant font-bold">2023</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Executive Takeaway -->
+<div class="p-md bg-primary/5 border-t border-slate-100">
+<div class="flex gap-2 items-center mb-1">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="font-label-caps text-[10px] text-primary uppercase">Executive Takeaway</span>
+</div>
+<p class="font-takeaway-text text-takeaway-text text-on-primary-fixed-variant">
+                        The shift toward international migration is now the absolute driver of BC's labor pool. Policy focus must transition from broad population growth to strategic integration and housing alignment for newcomers.
+                    </p>
+</div>
+</div>
+<!-- 2. Composition of Population Growth (Multi-line) -->
+<div class="col-span-12 lg:col-span-4 bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col">
+<div class="p-md border-b border-slate-100">
+<h3 class="font-h2-section text-h2-section text-on-surface">Growth Composition</h3>
+<p class="text-xs text-on-surface-variant">Share of Growth %</p>
+</div>
+<!-- Chart Placeholder -->
+<div class="flex-1 min-h-[300px] bg-slate-50 relative p-md">
+<div class="h-full w-full border-b border-l border-slate-300 relative overflow-hidden">
+<!-- Simulated Line Charts -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<!-- International Line -->
+<path d="M0,80 L25,70 L50,50 L75,30 L100,10" fill="none" stroke="#003366" stroke-width="2"></path>
+<!-- Interprovincial Line -->
+<path d="M0,60 L25,65 L50,62 L75,70 L100,85" fill="none" stroke="#649ee5" stroke-dasharray="2,2" stroke-width="2"></path>
+<!-- Natural Line -->
+<path d="M0,40 L25,45 L50,55 L75,70 L100,95" fill="none" stroke="#94a3b8" stroke-width="2"></path>
+</svg>
+<div class="absolute bottom-4 right-4 bg-white/80 p-2 text-[10px] rounded border border-slate-200">
+<div class="flex items-center gap-1"><div class="w-2 h-2 bg-primary-container rounded-full"></div> Int'l</div>
+<div class="flex items-center gap-1"><div class="w-2 h-2 bg-on-tertiary-container rounded-full"></div> Inter-Prov</div>
+<div class="flex items-center gap-1"><div class="w-2 h-2 bg-slate-400 rounded-full"></div> Natural</div>
+</div>
+</div>
+</div>
+<!-- Executive Takeaway -->
+<div class="p-md bg-primary/5 border-t border-slate-100">
+<div class="flex gap-2 items-center mb-1">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="font-label-caps text-[10px] text-primary uppercase">Executive Takeaway</span>
+</div>
+<p class="font-takeaway-text text-takeaway-text text-on-primary-fixed-variant">
+                        Negative natural growth trends are emerging sooner than historical models predicted, placing an urgent emphasis on retaining young interprovincial talent.
+                    </p>
+</div>
+</div>
+<!-- 3. Regional Population Growth Comparison (Clustered Bar) -->
+<div class="col-span-12 bg-white border border-slate-200 rounded-xl overflow-hidden flex flex-col">
+<div class="p-md border-b border-slate-100 flex justify-between items-center">
+<div>
+<h3 class="font-h2-section text-h2-section text-on-surface">Regional Population Growth Comparison</h3>
+<p class="text-xs text-on-surface-variant">Comparative growth across BC economic regions</p>
+</div>
+<div class="flex gap-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-primary-container rounded"></div>
+<span class="text-[10px] font-semibold text-on-surface-variant">ACTUAL</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 bg-secondary-container rounded"></div>
+<span class="text-[10px] font-semibold text-on-surface-variant">TARGET</span>
+</div>
+</div>
+</div>
+<!-- Chart Placeholder -->
+<div class="p-md bg-slate-50 flex flex-col gap-6">
+<!-- Region Bar -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+<span>Mainland / Southwest</span>
+<span>+4.2% Growth</span>
+</div>
+<div class="h-6 w-full bg-slate-200 rounded-full overflow-hidden flex">
+<div class="h-full bg-primary-container w-[88%]" title="Actual"></div>
+<div class="h-full bg-secondary-container w-[10%]" title="Variance"></div>
+</div>
+</div>
+<!-- Region Bar -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+<span>Vancouver Island / Coast</span>
+<span>+2.8% Growth</span>
+</div>
+<div class="h-6 w-full bg-slate-200 rounded-full overflow-hidden flex">
+<div class="h-full bg-primary-container w-[65%]" title="Actual"></div>
+<div class="h-full bg-secondary-container w-[15%]" title="Variance"></div>
+</div>
+</div>
+<!-- Region Bar -->
+<div class="space-y-2">
+<div class="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-on-surface-variant">
+<span>Thompson-Okanagan</span>
+<span>+2.1% Growth</span>
+</div>
+<div class="h-6 w-full bg-slate-200 rounded-full overflow-hidden flex">
+<div class="h-full bg-primary-container w-[52%]" title="Actual"></div>
+<div class="h-full bg-secondary-container w-[20%]" title="Variance"></div>
+</div>
+</div>
+</div>
+<!-- Executive Takeaway -->
+<div class="p-md bg-primary/5 border-t border-slate-100">
+<div class="flex gap-2 items-center mb-1">
+<span class="material-symbols-outlined text-primary text-sm" data-icon="lightbulb" style="font-variation-settings: 'FILL' 1;">lightbulb</span>
+<span class="font-label-caps text-[10px] text-primary uppercase">Executive Takeaway</span>
+</div>
+<p class="font-takeaway-text text-takeaway-text text-on-primary-fixed-variant">
+                        Growth concentration remains heavily skewed toward the Southwest. There is a 2.4% "growth gap" between urban and rural centers that requires targeted regional economic diversification strategies to prevent labor shortages in the North.
+                    </p>
+</div>
+</div>
+</div>
+<!-- Secondary Insights / Quick Links -->
+<section class="mt-lg grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<div class="bg-white p-md border border-slate-200 rounded-lg group cursor-pointer hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="map">map</span>
+<h4 class="font-bold text-sm mb-1">Detailed Regional Maps</h4>
+<p class="text-xs text-on-surface-variant">Drill down into municipality-level demographic shifts.</p>
+</div>
+<div class="bg-white p-md border border-slate-200 rounded-lg group cursor-pointer hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="history">history</span>
+<h4 class="font-bold text-sm mb-1">Historical Comparison</h4>
+<p class="text-xs text-on-surface-variant">Compare current trends with 10-year and 20-year cycles.</p>
+</div>
+<div class="bg-white p-md border border-slate-200 rounded-lg group cursor-pointer hover:border-primary transition-colors">
+<span class="material-symbols-outlined text-primary mb-2" data-icon="description">description</span>
+<h4 class="font-bold text-sm mb-1">Methodology Report</h4>
+<p class="text-xs text-on-surface-variant">Review the data sourcing and weighting algorithms used.</p>
+</div>
+</section>
+</main>
+</body></html>
