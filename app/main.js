@@ -216,57 +216,10 @@ const industryAverageAgeData = [
   { industry: "Accommodation and food services", avgAge: 35.66 }
 ];
 
-const industryGenderGapData = [
-  { industry: "Construction", gapPp: 72.61, direction: "Men+", menShare: 86.31, womenShare: 13.69 },
-  {
-    industry: "Forestry, fishing, mining, quarrying, oil and gas",
-    gapPp: 62.23,
-    direction: "Men+",
-    menShare: 81.12,
-    womenShare: 18.88
-  },
-  { industry: "Transportation and warehousing", gapPp: 56.1, direction: "Men+", menShare: 78.05, womenShare: 21.95 },
-  { industry: "Health care and social assistance", gapPp: 53.78, direction: "Women+", menShare: 23.11, womenShare: 76.89 },
-  { industry: "Utilities", gapPp: 49.32, direction: "Men+", menShare: 74.66, womenShare: 25.34 },
-  { industry: "Manufacturing", gapPp: 46.04, direction: "Men+", menShare: 73.02, womenShare: 26.98 },
-  { industry: "Educational services", gapPp: 35.16, direction: "Women+", menShare: 32.42, womenShare: 67.58 },
-  { industry: "Agriculture", gapPp: 18.18, direction: "Men+", menShare: 59.09, womenShare: 40.91 },
-  {
-    industry: "Business, building and other support services",
-    gapPp: 16.87,
-    direction: "Men+",
-    menShare: 58.43,
-    womenShare: 41.57
-  },
-  {
-    industry: "Professional, scientific and technical services",
-    gapPp: 14.24,
-    direction: "Men+",
-    menShare: 57.12,
-    womenShare: 42.88
-  },
-  { industry: "Accommodation and food services", gapPp: 13.0, direction: "Women+", menShare: 43.5, womenShare: 56.5 },
-  { industry: "Wholesale and retail trade", gapPp: 9.16, direction: "Men+", menShare: 54.58, womenShare: 45.42 },
-  {
-    industry: "Other services (except public administration)",
-    gapPp: 7.67,
-    direction: "Women+",
-    menShare: 46.17,
-    womenShare: 53.83
-  },
-  {
-    industry: "Finance, insurance, real estate, rental and leasing",
-    gapPp: 7.19,
-    direction: "Women+",
-    menShare: 46.4,
-    womenShare: 53.6
-  },
-  { industry: "Information, culture and recreation", gapPp: 3.85, direction: "Men+", menShare: 51.92, womenShare: 48.08 },
-  { industry: "Public administration", gapPp: 1.68, direction: "Men+", menShare: 50.84, womenShare: 49.16 }
-];
-
 const driverEl = document.getElementById("chart-population-driver");
 const driverChart = echarts.init(driverEl);
+const driverUnitToggle = document.getElementById("population-driver-unit-toggle");
+const driverUnitButtons = document.querySelectorAll(".driver-unit-btn");
 
 const years = chartData.map((d) => d.year);
 const natural = chartData.map((d) => d.natural);
@@ -274,102 +227,159 @@ const interprov = chartData.map((d) => d.interprovincial);
 const npr = chartData.map((d) => d.npr);
 const internationalExNpr = chartData.map((d) => d.internationalExNpr);
 const total = chartData.map((d) => d.total);
+const populationByYear = Object.fromEntries(growthCompositionData.map((d) => [d.year, d.totalPopulation]));
+let driverUnitMode = "people";
 
-const driverOption = {
-  grid: { left: 70, right: 34, top: 70, bottom: 72 },
-  legend: {
-    top: 18,
-    itemGap: 16,
-    textStyle: { fontFamily: "Public Sans", color: "#344053" },
-    data: [
-      "Natural increase",
-      "Interprovincial migration",
-      "International migration (excl. NPR)",
-      "Net NPR change",
-      "Total population change"
-    ]
-  },
-  tooltip: {
-    trigger: "axis",
-    axisPointer: { type: "shadow" },
-    valueFormatter: (value) => `${value.toLocaleString()} persons`
-  },
-  xAxis: {
-    type: "category",
-    data: years,
-    axisLine: { lineStyle: { color: "#9da8b5" } },
-    axisLabel: { color: "#344053", fontFamily: "Inter" }
-  },
-  yAxis: {
-    type: "value",
-    name: "Number of persons",
-    nameLocation: "middle",
-    nameGap: 55,
-    axisLabel: {
-      color: "#344053",
-      fontFamily: "Inter",
-      formatter: (value) => `${Math.round(value / 1000)}k`
-    },
-    splitLine: { lineStyle: { color: "#e8edf2" } }
-  },
-  series: [
-    {
-      name: "Natural increase",
-      type: "bar",
-      stack: "growth",
-      data: natural,
-      itemStyle: { color: "#9ca3af" },
-      emphasis: { focus: "series" }
-    },
-    {
-      name: "Interprovincial migration",
-      type: "bar",
-      stack: "growth",
-      data: interprov,
-      itemStyle: { color: "#649ee5" },
-      emphasis: { focus: "series" }
-    },
-    {
-      name: "International migration (excl. NPR)",
-      type: "bar",
-      stack: "growth",
-      data: internationalExNpr,
-      itemStyle: { color: "#003366" },
-      emphasis: { focus: "series" }
-    },
-    {
-      name: "Net NPR change",
-      type: "bar",
-      stack: "growth",
-      data: npr,
-      itemStyle: { color: "#0b5f64" },
-      emphasis: { focus: "series" }
-    },
-    {
-      name: "Total population change",
-      type: "line",
-      data: total,
-      symbol: "circle",
-      symbolSize: 7,
-      smooth: false,
-      itemStyle: { color: "#111111" },
-      lineStyle: { color: "#111111", width: 1.5 },
-      z: 10,
-      markArea: {
-        silent: true,
-        itemStyle: { color: "rgba(96, 165, 250, 0.08)" },
-        label: { color: "#1f2937", fontWeight: 600, fontFamily: "Public Sans" },
-        data: [
-          [{ name: "2019 baseline", xAxis: "2019" }, { xAxis: "2019" }],
-          [{ name: "2020-2021 pandemic disruption", xAxis: "2020" }, { xAxis: "2021" }],
-          [{ name: "2022-2025 post-pandemic rebound", xAxis: "2022" }, { xAxis: "2025" }]
-        ]
-      }
-    }
-  ]
+const formatThousands = (value) => `${Math.round(value / 1000)}k`;
+
+const formatDriverValue = (value, mode) => {
+  if (mode === "percent") {
+    return `${value.toFixed(2)}%`;
+  }
+  return `${Math.round(value).toLocaleString()} persons`;
 };
 
-driverChart.setOption(driverOption);
+const getDriverSeriesData = (mode) =>
+  chartData.map((d) => {
+    if (mode === "percent") {
+      const population = populationByYear[d.year];
+      const toPercent = (value) => (population ? (value / population) * 100 : 0);
+      return {
+        year: d.year,
+        natural: +toPercent(d.natural).toFixed(3),
+        interprovincial: +toPercent(d.interprovincial).toFixed(3),
+        npr: +toPercent(d.npr).toFixed(3),
+        internationalExNpr: +toPercent(d.internationalExNpr).toFixed(3),
+        total: +toPercent(d.total).toFixed(3)
+      };
+    }
+    return d;
+  });
+
+const getDriverOption = (mode) => {
+  const seriesData = getDriverSeriesData(mode);
+  return {
+    grid: { left: 70, right: 34, top: 70, bottom: 72 },
+    legend: {
+      top: 18,
+      itemGap: 16,
+      textStyle: { fontFamily: "Public Sans", color: "#344053" },
+      data: [
+        "Natural increase",
+        "Interprovincial migration",
+        "International migration (excl. NPR)",
+        "Net NPR change",
+        "Total population change"
+      ]
+    },
+    tooltip: {
+      trigger: "axis",
+      axisPointer: { type: "shadow" },
+      valueFormatter: (value) => formatDriverValue(value, mode)
+    },
+    xAxis: {
+      type: "category",
+      data: years,
+      axisLine: { lineStyle: { color: "#9da8b5" } },
+      axisLabel: { color: "#344053", fontFamily: "Inter" }
+    },
+    yAxis: {
+      type: "value",
+      name: mode === "percent" ? "Share of annual population (%)" : "Number of persons",
+      nameLocation: "middle",
+      nameGap: 55,
+      axisLabel: {
+        color: "#344053",
+        fontFamily: "Inter",
+        formatter: (value) => (mode === "percent" ? `${value.toFixed(1)}%` : formatThousands(value))
+      },
+      splitLine: { lineStyle: { color: "#e8edf2" } }
+    },
+    series: [
+      {
+        name: "Natural increase",
+        type: "bar",
+        stack: "growth",
+        data: seriesData.map((d) => d.natural),
+        itemStyle: { color: "#9ca3af" },
+        emphasis: { focus: "series" }
+      },
+      {
+        name: "Interprovincial migration",
+        type: "bar",
+        stack: "growth",
+        data: seriesData.map((d) => d.interprovincial),
+        itemStyle: { color: "#649ee5" },
+        emphasis: { focus: "series" }
+      },
+      {
+        name: "International migration (excl. NPR)",
+        type: "bar",
+        stack: "growth",
+        data: seriesData.map((d) => d.internationalExNpr),
+        itemStyle: { color: "#003366" },
+        emphasis: { focus: "series" }
+      },
+      {
+        name: "Net NPR change",
+        type: "bar",
+        stack: "growth",
+        data: seriesData.map((d) => d.npr),
+        itemStyle: { color: "#0b5f64" },
+        emphasis: { focus: "series" }
+      },
+      {
+        name: "Total population change",
+        type: "line",
+        data: seriesData.map((d) => d.total),
+        symbol: "circle",
+        symbolSize: 7,
+        smooth: false,
+        itemStyle: { color: "#111111" },
+        lineStyle: { color: "#111111", width: 1.5 },
+        z: 10,
+        markArea: {
+          silent: true,
+          itemStyle: { color: "rgba(96, 165, 250, 0.08)" },
+          label: { color: "#1f2937", fontWeight: 600, fontFamily: "Public Sans" },
+          data: [
+            [{ name: "2019 baseline", xAxis: "2019" }, { xAxis: "2019" }],
+            [{ name: "2020-2021 pandemic disruption", xAxis: "2020" }, { xAxis: "2021" }],
+            [{ name: "2022-2025 post-pandemic rebound", xAxis: "2022" }, { xAxis: "2025" }]
+          ]
+        }
+      }
+    ]
+  };
+};
+
+const setDriverUnitButtonState = (mode) => {
+  if (!driverUnitButtons || driverUnitButtons.length === 0) return;
+  driverUnitButtons.forEach((button) => {
+    const isActive = button.dataset.unit === mode;
+    button.classList.toggle("bg-primary", isActive);
+    button.classList.toggle("text-white", isActive);
+    button.classList.toggle("font-semibold", isActive);
+    button.classList.toggle("text-primary-ink", !isActive);
+  });
+};
+
+const updateDriverChart = (mode) => {
+  driverUnitMode = mode;
+  driverChart.setOption(getDriverOption(mode), true);
+  setDriverUnitButtonState(mode);
+};
+
+updateDriverChart(driverUnitMode);
+if (driverUnitToggle) {
+  driverUnitToggle.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-unit]");
+    if (!button) return;
+    const unit = button.dataset.unit;
+    if (unit === driverUnitMode) return;
+    updateDriverChart(unit);
+  });
+}
 
 const indexedValue = (value, base) => (value / base) * 100;
 const compYears = growthCompositionData.map((d) => d.year);
@@ -682,8 +692,8 @@ const labourOption = {
   legend: {
     top: 16,
     textStyle: { fontFamily: "Public Sans", color: "#344053" },
-    data: ["Unemployed persons", "Vacant jobs", "Vacancy-to-unemployment ratio"],
-    selected: { "Vacancy-to-unemployment ratio": false }
+    data: ["Unemployed persons", "Vacant jobs", "Unemployment-to-vacancy ratio"],
+    selected: { "Unemployment-to-vacancy ratio": false }
   },
   tooltip: {
     trigger: "axis",
@@ -693,15 +703,15 @@ const labourOption = {
       const row = labourMonthlyData.find((d) => d.month === month);
       if (!row) return month;
       const markerByName = Object.fromEntries(params.map((p) => [p.seriesName, p.marker]));
-      const ratio =
-        row.unemployedPersons != null && row.vacancies != null && row.unemployedPersons > 0
-          ? row.vacancies / row.unemployedPersons
+      const uvRatio =
+        row.unemployedPersons != null && row.vacancies != null && row.vacancies > 0
+          ? row.unemployedPersons / row.vacancies
           : null;
       return [
         month,
         `${markerByName["Unemployed persons"] || ""} Unemployed persons: ${row.unemployedPersons == null ? "N/A" : row.unemployedPersons.toLocaleString()}`,
         `${markerByName["Vacant jobs"] || ""} Vacant jobs: ${row.vacancies == null ? "N/A" : row.vacancies.toLocaleString()}`,
-        `${markerByName["Vacancy-to-unemployment ratio"] || ""} Vacancy-to-unemployment ratio: ${ratio == null ? "N/A" : ratio.toFixed(2)}`
+        `${markerByName["Unemployment-to-vacancy ratio"] || ""} Unemployment-to-vacancy ratio: ${uvRatio == null ? "N/A" : uvRatio.toFixed(2)}`
       ].join("<br/>");
     }
   },
@@ -727,7 +737,7 @@ const labourOption = {
     },
     {
       type: "value",
-      name: "V/U ratio",
+      name: "U/V ratio",
       nameLocation: "middle",
       nameGap: 46,
       position: "right",
@@ -773,17 +783,17 @@ const labourOption = {
       }
     },
     {
-      name: "Vacancy-to-unemployment ratio",
+      name: "Unemployment-to-vacancy ratio",
       type: "line",
       yAxisIndex: 1,
       smooth: true,
       symbol: "none",
       connectNulls: false,
       data: labourMonthlyData.map((d) =>
-        d.unemployedPersons != null && d.vacancies != null && d.unemployedPersons > 0 ? d.vacancies / d.unemployedPersons : null
+        d.unemployedPersons != null && d.vacancies != null && d.vacancies > 0 ? d.unemployedPersons / d.vacancies : null
       ),
-      lineStyle: { color: "#fbbf24", width: 2 },
-      itemStyle: { color: "#fbbf24" }
+      lineStyle: { color: "#f97316", width: 2 },
+      itemStyle: { color: "#f97316" }
     }
   ]
 };
@@ -791,65 +801,82 @@ labourChart.setOption(labourOption);
 
 const attachmentEl = document.getElementById("chart-labour-attachment");
 const attachmentChart = echarts.init(attachmentEl);
+const labourTrendYears = growthCompositionData.map((d) => d.year);
+const labourTrendBase = growthCompositionData[0];
+const labour1864Indexed = growthCompositionData.map((d) => +indexedValue(d.workingAge, labourTrendBase.workingAge).toFixed(1));
+const labour65PlusIndexed = growthCompositionData.map((d) => +indexedValue(d.seniors, labourTrendBase.seniors).toFixed(1));
+const unempRateIndexed = leadingIndicators.unemploymentRate.map((v) => +indexedValue(v, leadingIndicators.unemploymentRate[0]).toFixed(1));
+const vacancyRateIndexed = leadingIndicators.vacancyRate.map((v) => +indexedValue(v, leadingIndicators.vacancyRate[0]).toFixed(1));
 const attachmentOption = {
-  grid: { left: 72, right: 34, top: 56, bottom: 74 },
+  grid: { left: 72, right: 34, top: 56, bottom: 70 },
   legend: {
     top: 14,
     textStyle: { fontFamily: "Public Sans", color: "#344053" },
-    data: ["Employed persons", "Unemployed persons"]
+    data: ["18-64 population", "Unemployment rate", "Vacancy rate", "65+ population"]
   },
   tooltip: {
     trigger: "axis",
-    axisPointer: { type: "shadow" },
+    axisPointer: { type: "line" },
     formatter: (params) => {
-      const group = params[0]?.axisValueLabel || "";
-      const lines = params.map((p) => `${p.marker} ${p.seriesName}: ${Math.round(p.value).toLocaleString()}`);
-      return [group.replace("\n", " "), ...lines].join("<br/>");
+      const year = params[0]?.axisValueLabel || "";
+      const lines = params.map((p) => `${p.marker} ${p.seriesName}: ${p.value.toFixed(1)}`);
+      return [`${year} (Index, 2019=100)`, ...lines].join("<br/>");
     }
   },
   xAxis: {
     type: "category",
-    data: labourAttachmentData.map((d) => d.group),
+    data: labourTrendYears,
     axisLine: { lineStyle: { color: "#9da8b5" } },
-    axisLabel: { color: "#344053", fontFamily: "Inter", interval: 0 }
+    axisLabel: { color: "#344053", fontFamily: "Inter" }
   },
   yAxis: {
     type: "value",
-    name: "Number of persons",
+    name: "Index (2019 = 100)",
     nameLocation: "middle",
     nameGap: 52,
-    min: 0,
-    axisLabel: { color: "#344053", fontFamily: "Inter", formatter: (v) => `${Math.round(v / 1000)}k` },
+    axisLabel: { color: "#344053", fontFamily: "Inter" },
     splitLine: { lineStyle: { color: "#e8edf2" } }
   },
   series: [
     {
-      name: "Employed persons",
-      type: "bar",
-      barMaxWidth: 42,
-      data: labourAttachmentData.map((d) => d.employedPersons),
-      itemStyle: { color: "#003366", borderRadius: [4, 4, 0, 0] },
-      label: {
-        show: true,
-        position: "top",
-        fontFamily: "Inter",
-        color: "#1f2937",
-        formatter: ({ value }) => `${Math.round(value / 1000)}k`
-      }
+      name: "18-64 population",
+      type: "line",
+      data: labour1864Indexed,
+      smooth: false,
+      symbol: "circle",
+      symbolSize: 6,
+      lineStyle: { width: 2, color: "#003366" },
+      itemStyle: { color: "#003366" }
     },
     {
-      name: "Unemployed persons",
-      type: "bar",
-      barMaxWidth: 42,
-      data: labourAttachmentData.map((d) => d.unemployedPersons),
-      itemStyle: { color: "#649ee5", borderRadius: [4, 4, 0, 0] },
-      label: {
-        show: true,
-        position: "top",
-        fontFamily: "Inter",
-        color: "#1f2937",
-        formatter: ({ value }) => `${Math.round(value / 1000)}k`
-      }
+      name: "Unemployment rate",
+      type: "line",
+      data: unempRateIndexed,
+      smooth: false,
+      symbol: "circle",
+      symbolSize: 6,
+      lineStyle: { width: 2, color: "#b91c1c" },
+      itemStyle: { color: "#b91c1c" }
+    },
+    {
+      name: "Vacancy rate",
+      type: "line",
+      data: vacancyRateIndexed,
+      smooth: false,
+      symbol: "circle",
+      symbolSize: 6,
+      lineStyle: { width: 2, color: "#0b5f64" },
+      itemStyle: { color: "#0b5f64" }
+    },
+    {
+      name: "65+ population",
+      type: "line",
+      data: labour65PlusIndexed,
+      smooth: false,
+      symbol: "circle",
+      symbolSize: 6,
+      lineStyle: { width: 2, color: "#649ee5" },
+      itemStyle: { color: "#649ee5" }
     }
   ]
 };
@@ -1026,6 +1053,94 @@ const programSpreadChart = makeMiniLine(
   1.3
 );
 
+const programPressureEl = document.getElementById("chart-program-pressure-signals");
+const programPressureChart = echarts.init(programPressureEl);
+programPressureChart.setOption({
+  grid: { left: 74, right: 82, top: 62, bottom: 72 },
+  legend: {
+    top: 16,
+    textStyle: { fontFamily: "Public Sans", color: "#344053" },
+    data: ["Unemployed persons (thousands)", "Youth unemployment rate (15-24)", "Vacancy rate"]
+  },
+  tooltip: {
+    trigger: "axis",
+    axisPointer: { type: "cross" },
+    formatter: (params) => {
+      const year = params[0]?.axisValue || "";
+      const markerByName = Object.fromEntries(params.map((p) => [p.seriesName, p.marker]));
+      const row = workbcProgramIndicators.find((d) => d.year === year);
+      const idx = leadingIndicators.years.indexOf(year);
+      const vacancy = idx >= 0 ? leadingIndicators.vacancyRate[idx] : null;
+      return [
+        year,
+        `${markerByName["Unemployed persons (thousands)"] || ""} Unemployed persons (thousands): ${row ? row.unemploymentThousands.toFixed(1) : "N/A"}`,
+        `${markerByName["Youth unemployment rate (15-24)"] || ""} Youth unemployment rate (15-24): ${row ? row.youthUnemploymentRate.toFixed(1) : "N/A"}%`,
+        `${markerByName["Vacancy rate"] || ""} Vacancy rate: ${vacancy == null ? "N/A" : vacancy.toFixed(2)}%`
+      ].join("<br/>");
+    }
+  },
+  xAxis: {
+    type: "category",
+    data: programYears,
+    axisLine: { lineStyle: { color: "#9da8b5" } },
+    axisLabel: { color: "#344053", fontFamily: "Inter" }
+  },
+  yAxis: [
+    {
+      type: "value",
+      name: "Unemployed persons (thousands)",
+      nameLocation: "middle",
+      nameGap: 56,
+      axisLabel: { color: "#344053", fontFamily: "Inter", formatter: (v) => `${v.toFixed(1)}k` },
+      splitLine: { lineStyle: { color: "#e8edf2" } }
+    },
+    {
+      type: "value",
+      name: "Rate (%)",
+      nameLocation: "middle",
+      nameGap: 52,
+      position: "right",
+      axisLabel: { color: "#344053", fontFamily: "Inter", formatter: (v) => `${v.toFixed(1)}%` },
+      splitLine: { show: false }
+    }
+  ],
+  series: [
+    {
+      name: "Unemployed persons (thousands)",
+      type: "line",
+      yAxisIndex: 0,
+      smooth: false,
+      symbol: "circle",
+      symbolSize: 7,
+      data: workbcProgramIndicators.map((d) => d.unemploymentThousands),
+      lineStyle: { color: "#003366", width: 2.4 },
+      itemStyle: { color: "#003366" }
+    },
+    {
+      name: "Youth unemployment rate (15-24)",
+      type: "line",
+      yAxisIndex: 1,
+      smooth: false,
+      symbol: "circle",
+      symbolSize: 7,
+      data: workbcProgramIndicators.map((d) => d.youthUnemploymentRate),
+      lineStyle: { color: "#b91c1c", width: 2.2 },
+      itemStyle: { color: "#b91c1c" }
+    },
+    {
+      name: "Vacancy rate",
+      type: "line",
+      yAxisIndex: 1,
+      smooth: false,
+      symbol: "circle",
+      symbolSize: 7,
+      data: leadingIndicators.vacancyRate,
+      lineStyle: { color: "#0b5f64", width: 2.2 },
+      itemStyle: { color: "#0b5f64" }
+    }
+  ]
+});
+
 const industryAgeEl = document.getElementById("chart-industry-average-age");
 const industryAgeChart = echarts.init(industryAgeEl);
 industryAgeChart.setOption({
@@ -1070,254 +1185,6 @@ industryAgeChart.setOption({
   ]
 });
 
-const industryGapEl = document.getElementById("chart-industry-gender-gap");
-const industryGapChart = echarts.init(industryGapEl);
-industryGapChart.setOption({
-  grid: { left: 320, right: 36, top: 20, bottom: 36 },
-  tooltip: {
-    trigger: "axis",
-    axisPointer: { type: "shadow" },
-    formatter: (params) => {
-      const idx = params[0].dataIndex;
-      const row = industryGenderGapData[idx];
-      return [
-        row.industry,
-        `${params[0].marker} Gap: ${row.gapPp.toFixed(2)} pp`,
-        `Men+: ${row.menShare.toFixed(2)}%`,
-        `Women+: ${row.womenShare.toFixed(2)}%`,
-        `Dominant: ${row.direction}`
-      ].join("<br/>");
-    }
-  },
-  xAxis: {
-    type: "value",
-    name: "Gender gap (percentage points)",
-    nameLocation: "middle",
-    nameGap: 34,
-    min: 0,
-    max: 80,
-    axisLabel: { color: "#344053", fontFamily: "Inter" },
-    splitLine: { lineStyle: { color: "#e8edf2" } }
-  },
-  yAxis: {
-    type: "category",
-    inverse: true,
-    data: industryGenderGapData.map((d) => d.industry),
-    axisLabel: { color: "#344053", fontFamily: "Inter", width: 290, overflow: "break" },
-    axisTick: { show: false },
-    axisLine: { show: false }
-  },
-  series: [
-    {
-      type: "bar",
-      data: industryGenderGapData.map((d) => d.gapPp),
-      barMaxWidth: 22,
-      itemStyle: {
-        color: (p) => (industryGenderGapData[p.dataIndex].direction === "Men+" ? "#2563eb" : "#0b5f64"),
-        borderRadius: [0, 4, 4, 0]
-      },
-      label: {
-        show: true,
-        position: "right",
-        color: "#1f2937",
-        fontFamily: "Inter",
-        formatter: ({ value, dataIndex }) =>
-          `${value.toFixed(2)} pp (${industryGenderGapData[dataIndex].direction})`
-      }
-    }
-  ]
-});
-
-const futureEl = document.getElementById("chart-migration-source-split");
-const futureChart = echarts.init(futureEl);
-const futureOption = {
-  grid: { left: 74, right: 34, top: 62, bottom: 68 },
-  legend: {
-    top: 16,
-    textStyle: { fontFamily: "Public Sans", color: "#344053" },
-    data: ["Interprovincial migration", "International migration (excl. NPR)", "Net NPR change"]
-  },
-  tooltip: {
-    trigger: "axis",
-    axisPointer: { type: "cross" },
-    valueFormatter: (v) => `${Math.round(v).toLocaleString()}`
-  },
-  xAxis: {
-    type: "category",
-    data: years,
-    boundaryGap: false,
-    axisLine: { lineStyle: { color: "#9da8b5" } },
-    axisLabel: { color: "#344053", fontFamily: "Inter" }
-  },
-  yAxis: {
-    type: "value",
-    name: "Net persons",
-    nameLocation: "middle",
-    nameGap: 54,
-    axisLabel: { color: "#344053", fontFamily: "Inter", formatter: (v) => `${Math.round(v / 1000)}k` },
-    splitLine: { lineStyle: { color: "#e8edf2" } }
-  },
-  series: [
-    {
-      name: "Interprovincial migration",
-      type: "line",
-      stack: "migration",
-      areaStyle: { opacity: 0.35, color: "#649ee5" },
-      lineStyle: { color: "#649ee5", width: 1.8 },
-      symbol: "circle",
-      symbolSize: 5,
-      data: interprov
-    },
-    {
-      name: "International migration (excl. NPR)",
-      type: "line",
-      stack: "migration",
-      areaStyle: { opacity: 0.35, color: "#003366" },
-      lineStyle: { color: "#003366", width: 1.8 },
-      symbol: "circle",
-      symbolSize: 5,
-      data: internationalExNpr
-    },
-    {
-      name: "Net NPR change",
-      type: "line",
-      stack: "migration",
-      areaStyle: { opacity: 0.35, color: "#0b5f64" },
-      lineStyle: { color: "#0b5f64", width: 1.8 },
-      symbol: "circle",
-      symbolSize: 5,
-      data: npr,
-      markPoint: {
-        symbol: "pin",
-        symbolSize: 34,
-        data: [{ name: "NPR peak", coord: ["2023", 114535], value: "Peak" }],
-        label: { color: "#ffffff", fontSize: 9, fontWeight: 700 }
-      }
-    }
-  ]
-};
-futureChart.setOption(futureOption);
-
-const setIndicatorStatus = (elId, current, previous, betterWhen) => {
-  const el = document.getElementById(elId);
-  if (!el) return;
-  const diff = current - previous;
-  const small = Math.abs(diff) <= Math.abs(previous) * 0.03;
-  let label = "Stable";
-  let color = "#6b7280";
-
-  if (!small) {
-    if (betterWhen === "higher") {
-      label = diff > 0 ? "Improving" : "Watch";
-      color = diff > 0 ? "#0b5f64" : "#b91c1c";
-    } else if (betterWhen === "lower") {
-      label = diff < 0 ? "Improving" : "Watch";
-      color = diff < 0 ? "#0b5f64" : "#b91c1c";
-    } else {
-      label = diff > 0 ? "Up" : "Down";
-      color = "#334155";
-    }
-  }
-  el.textContent = label;
-  el.style.color = color;
-};
-
-const setIndicatorValue = (elId, valueText) => {
-  const el = document.getElementById(elId);
-  if (!el) return;
-  el.textContent = valueText;
-};
-
-const miniSparkCharts = [];
-const addSparkline = (elId, data, color, formatter) => {
-  const el = document.getElementById(elId);
-  if (!el) return;
-  const chart = echarts.init(el);
-  chart.setOption({
-    grid: { left: 4, right: 4, top: 8, bottom: 14 },
-    tooltip: {
-      trigger: "axis",
-      formatter: (params) => `${params[0].axisValue}<br/>${formatter(params[0].value)}`
-    },
-    xAxis: {
-      type: "category",
-      data: leadingIndicators.years,
-      axisLine: { show: false },
-      axisTick: { show: false },
-      axisLabel: { show: false }
-    },
-    yAxis: {
-      type: "value",
-      axisLine: { show: false },
-      axisTick: { show: false },
-      axisLabel: { show: false },
-      splitLine: { show: false }
-    },
-    series: [
-      {
-        type: "line",
-        smooth: true,
-        symbol: "none",
-        data,
-        lineStyle: { color, width: 2 },
-        areaStyle: { color: `${color}22` }
-      }
-    ]
-  });
-  miniSparkCharts.push(chart);
-};
-
-setIndicatorValue("value-interprov", `${leadingIndicators.interprovMigration.at(-1).toLocaleString()}`);
-setIndicatorValue("value-npr", `${leadingIndicators.nprChange.at(-1).toLocaleString()}`);
-setIndicatorValue("value-unemp-rate", `${leadingIndicators.unemploymentRate.at(-1).toFixed(1)}%`);
-setIndicatorValue("value-vac-rate", `${leadingIndicators.vacancyRate.at(-1).toFixed(2)}%`);
-setIndicatorValue("value-ei-proxy", `${leadingIndicators.eiProxyUnemploymentThousands.at(-1).toFixed(1)}k`);
-setIndicatorValue("value-ri-er", `${leadingIndicators.recentImmigrantEmploymentRate.at(-1).toFixed(1)}%`);
-
-setIndicatorStatus(
-  "status-interprov",
-  leadingIndicators.interprovMigration.at(-1),
-  leadingIndicators.interprovMigration.at(-2),
-  "higher"
-);
-setIndicatorStatus("status-npr", leadingIndicators.nprChange.at(-1), leadingIndicators.nprChange.at(-2), "higher");
-setIndicatorStatus(
-  "status-unemp-rate",
-  leadingIndicators.unemploymentRate.at(-1),
-  leadingIndicators.unemploymentRate.at(-2),
-  "lower"
-);
-setIndicatorStatus("status-vac-rate", leadingIndicators.vacancyRate.at(-1), leadingIndicators.vacancyRate.at(-2), "none");
-setIndicatorStatus(
-  "status-ei-proxy",
-  leadingIndicators.eiProxyUnemploymentThousands.at(-1),
-  leadingIndicators.eiProxyUnemploymentThousands.at(-2),
-  "lower"
-);
-setIndicatorStatus(
-  "status-ri-er",
-  leadingIndicators.recentImmigrantEmploymentRate.at(-1),
-  leadingIndicators.recentImmigrantEmploymentRate.at(-2),
-  "higher"
-);
-
-addSparkline(
-  "spark-interprov",
-  leadingIndicators.interprovMigration,
-  "#2563eb",
-  (v) => `${Math.round(v).toLocaleString()}`
-);
-addSparkline("spark-npr", leadingIndicators.nprChange, "#0b5f64", (v) => `${Math.round(v).toLocaleString()}`);
-addSparkline("spark-unemp-rate", leadingIndicators.unemploymentRate, "#b91c1c", (v) => `${v.toFixed(1)}%`);
-addSparkline("spark-vac-rate", leadingIndicators.vacancyRate, "#003366", (v) => `${v.toFixed(2)}%`);
-addSparkline("spark-ei-proxy", leadingIndicators.eiProxyUnemploymentThousands, "#6b7280", (v) => `${v.toFixed(1)}k`);
-addSparkline(
-  "spark-ri-er",
-  leadingIndicators.recentImmigrantEmploymentRate,
-  "#7c2d12",
-  (v) => `${v.toFixed(1)}%`
-);
-
 const tabButtons = document.querySelectorAll(".tab-btn");
 const tabPanels = document.querySelectorAll(".tab-panel");
 const setActiveTab = (targetId) => {
@@ -1347,11 +1214,8 @@ const setActiveTab = (targetId) => {
     programLongTermChart.resize();
     programYouthChart.resize();
     programSpreadChart.resize();
+    programPressureChart.resize();
     industryAgeChart.resize();
-    industryGapChart.resize();
-  } else if (targetId === "tab-future") {
-    futureChart.resize();
-    miniSparkCharts.forEach((c) => c.resize());
   }
 };
 
@@ -1372,8 +1236,6 @@ window.addEventListener("resize", () => {
   programLongTermChart.resize();
   programYouthChart.resize();
   programSpreadChart.resize();
+  programPressureChart.resize();
   industryAgeChart.resize();
-  industryGapChart.resize();
-  futureChart.resize();
-  miniSparkCharts.forEach((c) => c.resize());
 });

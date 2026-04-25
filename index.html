@@ -61,15 +61,21 @@
           >
             WorkBC Program Impacts
           </button>
-          <button
-            id="tab-btn-future"
-            data-target="tab-future"
-            class="tab-btn block w-full text-left px-4 py-2 text-blue-100/80"
-            type="button"
-          >
-            Future Trends
-          </button>
         </nav>
+        <div class="mt-6 rounded-lg border border-white/20 bg-white/10 p-3 text-[11px] leading-relaxed text-blue-100">
+          <p>
+            This dashboard has been developed exclusively as part of the REQ122417 assignment for the Senior Economist position within ELMSD Analytics, Employment and Labour Market Services Division, Ministry of Social Development and Poverty Reduction, Government of British Columbia (April 2026).
+          </p>
+          <div class="mt-3 border-t border-white/20 pt-3">
+            <p class="font-semibold text-white">Prepared by:</p>
+            <p class="mt-1">Mehdi Naji</p>
+            <p>Senior Policy Analyst</p>
+            <p>Economic Strategy Branch</p>
+            <p>Small Business &amp; Economic Development Division</p>
+            <p>Ministry of Jobs, Economic Development and Innovation</p>
+            <p class="mt-1 break-all">mehdi.naji@gov.bc.ca</p>
+          </div>
+        </div>
       </aside>
 
       <main class="flex-1 p-6 md:p-10 max-w-[1600px]">
@@ -77,46 +83,35 @@
         <header class="mb-8">
           <p class="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Population Analytics</p>
           <h2 class="text-3xl font-semibold mt-2">Shift in Population Drivers</h2>
-          <p class="text-sm text-muted-ink mt-3 max-w-4xl">
-            British Columbia's population growth engine shifted over 2019-2025. This release includes three executive charts:
-            growth by driver, indexed growth composition, and regional divergence across BC.
-          </p>
         </header>
-
-        <section class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <article class="bg-white border border-outline rounded-lg p-4">
-            <p class="text-[11px] uppercase tracking-[0.08em] text-muted-ink">Largest Total Increase</p>
-            <p class="font-numeric text-2xl font-bold mt-1">2023</p>
-            <p class="text-sm text-muted-ink mt-1">+168,085 persons</p>
-          </article>
-          <article class="bg-white border border-outline rounded-lg p-4">
-            <p class="text-[11px] uppercase tracking-[0.08em] text-muted-ink">Migration Share (2023)</p>
-            <p class="font-numeric text-2xl font-bold mt-1">102%</p>
-            <p class="text-sm text-muted-ink mt-1">Natural increase was negative</p>
-          </article>
-          <article class="bg-white border border-outline rounded-lg p-4">
-            <p class="text-[11px] uppercase tracking-[0.08em] text-muted-ink">Peak NPR Contribution</p>
-            <p class="font-numeric text-2xl font-bold mt-1">2023</p>
-            <p class="text-sm text-muted-ink mt-1">+114,535 persons</p>
-          </article>
-          <article class="bg-white border border-outline rounded-lg p-4">
-            <p class="text-[11px] uppercase tracking-[0.08em] text-muted-ink">2025 Signal</p>
-            <p class="font-numeric text-2xl font-bold mt-1">Net Decline</p>
-            <p class="text-sm text-muted-ink mt-1">-41,461 total increase</p>
-          </article>
-        </section>
 
         <section class="bg-white border border-outline rounded-xl overflow-hidden">
           <div class="px-6 py-5 border-b border-outline">
             <h3 class="text-xl font-semibold">BC Population Change by Component, 2019-2025</h3>
-            <p class="text-sm text-muted-ink mt-1">
-              Annual contribution by component (stacked columns) with total population change overlay (black line).
-            </p>
+            <div class="mt-4 flex flex-wrap items-center gap-3">
+              <p class="text-xs uppercase tracking-[0.08em] text-muted-ink font-semibold">Display unit</p>
+              <div id="population-driver-unit-toggle" class="inline-flex rounded-md border border-outline bg-white p-1 text-sm">
+                <button
+                  type="button"
+                  data-unit="people"
+                  class="driver-unit-btn rounded px-3 py-1.5 bg-primary text-white font-semibold"
+                >
+                  Number of people
+                </button>
+                <button
+                  type="button"
+                  data-unit="percent"
+                  class="driver-unit-btn rounded px-3 py-1.5 text-primary-ink"
+                >
+                  Percentage
+                </button>
+              </div>
+            </div>
           </div>
 
           <div id="chart-population-driver" class="h-[520px] w-full"></div>
           <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
-            Source: <span class="font-numeric">Major data file.xlsx</span>
+            Source: <span class="font-numeric">Government of British Columbia population statistics portal; Quarterly population and migration estimates for B.C.</span>
           </p>
 
           <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
@@ -130,14 +125,11 @@
         <section class="bg-white border border-outline rounded-xl overflow-hidden mt-8">
           <div class="px-6 py-5 border-b border-outline">
             <h3 class="text-xl font-semibold">BC Population Trends: Total, Working-Age, and Seniors (2019=100)</h3>
-            <p class="text-sm text-muted-ink mt-1">
-              Indexed trends (2019=100) to compare headline population growth with labour-market-relevant growth.
-            </p>
           </div>
 
           <div id="chart-growth-composition" class="h-[460px] w-full"></div>
           <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
-            Source: <span class="font-numeric">Major data file.xlsx</span>, <span class="font-numeric">LFS (2019-CSV to 2025-CSV)</span>
+            Source: <span class="font-numeric">Government of British Columbia population statistics portal; Quarterly population and migration estimates for B.C.</span>, <span class="font-numeric">Statistics Canada, Labour Force Survey (years 2019 - 2025)</span>
           </p>
 
           <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
@@ -154,9 +146,6 @@
         <section class="bg-white border border-outline rounded-xl overflow-hidden mt-8">
           <div class="px-6 py-5 border-b border-outline">
             <h3 class="text-xl font-semibold">BC Regional Population Levels and Annual Growth</h3>
-            <p class="text-sm text-muted-ink mt-1">
-              All development regions shown: selected-year population level (bars) and corresponding one-year growth rate (line).
-            </p>
             <div class="mt-4">
               <p class="text-xs uppercase tracking-[0.08em] text-muted-ink font-semibold mb-2">Year</p>
               <div id="regional-year-radios" class="flex flex-wrap items-center gap-4 text-sm">
@@ -173,7 +162,7 @@
 
           <div id="chart-regional-growth" class="h-[430px] w-full"></div>
           <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
-            Source: <span class="font-numeric">pop_municipal_subprov_areas.xlsx</span>
+            Source: <span class="font-numeric">Government of British Columbia population statistics portal; Municipal and sub-provincial areas population, 2011 - 2025</span>
           </p>
 
             <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
@@ -190,14 +179,11 @@
         <section class="bg-white border border-outline rounded-xl overflow-hidden mt-8">
           <div class="px-6 py-5 border-b border-outline">
             <h3 class="text-xl font-semibold">Sub-Regional Population Growth Rates and Weighted BC Average</h3>
-            <p class="text-sm text-muted-ink mt-1">
-              Thin smoothed lines: annual sub-region (regional district) growth rates. Thick smoothed line: weighted average across all sub-regions.
-            </p>
           </div>
 
           <div id="chart-regional-spaghetti" class="h-[470px] w-full"></div>
           <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
-            Source: <span class="font-numeric">pop_municipal_subprov_areas.xlsx (Dev-RD)</span>
+            Source: <span class="font-numeric">Government of British Columbia population statistics portal; Municipal and sub-provincial areas population, 2011 - 2025</span>
           </p>
 
           <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
@@ -213,32 +199,25 @@
           <header class="mb-8">
             <p class="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Labour Market Analytics</p>
             <h2 class="text-3xl font-semibold mt-2">Labour Market Impacts</h2>
-            <p class="text-sm text-muted-ink mt-3 max-w-4xl">
-              Focus on labour supply-demand tension: unemployment conditions versus demand pressure to surface whether BC is facing
-              broad scarcity or matching friction.
-            </p>
           </header>
 
           <section class="bg-white border border-outline rounded-xl overflow-hidden">
             <div class="px-6 py-5 border-b border-outline">
               <h3 class="text-xl font-semibold">BC Unemployed Persons and Vacant Jobs (Monthly)</h3>
-              <p class="text-sm text-muted-ink mt-1">
-                Monthly levels: unemployed persons vs vacant jobs, 2019-01 to 2025-12.
-              </p>
             </div>
 
             <div id="chart-labour-tightness" class="h-[500px] w-full"></div>
             <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
-              Source: <span class="font-numeric">LFS (2019-CSV to 2025-CSV)</span>, <span class="font-numeric">Job Vacancies.csv</span>
+              Source: <span class="font-numeric">Statistics Canada, Labour Force Survey (years 2019 - 2025)</span>, <span class="font-numeric">Statistics Canada, Table 14-10-0371-01, Job vacancies, payroll employees, and job vacancy rate by provinces and territories</span>
             </p>
             <p class="px-6 pb-4 text-xs text-muted-ink">
-              Note: the <span class="font-semibold">Vacancy-to-unemployment ratio</span> line is hidden by default. Click its legend item to toggle it on.
+              Note: the <span class="font-semibold">Unemployment-to-vacancy ratio</span> line is hidden by default. Click its legend item to toggle it on.
             </p>
 
             <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
               <p class="text-[11px] uppercase tracking-[0.08em] text-primary font-semibold">Executive Takeaway</p>
               <p class="text-sm mt-1 text-primary-ink">
-                Monthly levels show tightening into 2022 followed by cooling through 2024-2025: vacancies peak and then trend down while unemployed persons trend up. The vacancy-to-unemployment ratio summarizes the shift, peaking in 2022-09 (above 1) and declining to about 0.37 by late 2025. Even in the cooling phase, vacancies remain non-trivial alongside elevated unemployment, a pattern consistent with matching frictions by occupation, skill, and geography rather than a single province-wide shortage or surplus.
+                Monthly levels show tightening into 2022 followed by cooling through 2024-2025: vacancies peak and then trend down while unemployed persons trend up. The unemployment-to-vacancy ratio summarizes the shift, rising above 2 by late 2025. Even in the cooling phase, vacancies remain non-trivial alongside elevated unemployment, a pattern consistent with matching frictions by occupation, skill, and geography rather than a single province-wide shortage or surplus.
               </p>
               <p class="text-xs text-muted-ink mt-2">
                 Monthly series now extends through 2025 for both unemployed persons and vacant jobs, enabling a current view of
@@ -249,24 +228,24 @@
 
           <section class="bg-white border border-outline rounded-xl overflow-hidden mt-8">
             <div class="px-6 py-5 border-b border-outline">
-              <h3 class="text-xl font-semibold">Labour Market Status by Key Population Group, 2025</h3>
-              <p class="text-sm text-muted-ink mt-1">
-                2025 average monthly levels by group: employed persons and unemployed persons.
-              </p>
+              <h3 class="text-xl font-semibold">Indexed Labour Demographics and Tightness Indicators (2019=100)</h3>
             </div>
 
             <div id="chart-labour-attachment" class="h-[460px] w-full"></div>
             <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
-              Source: <span class="font-numeric">LFS (2025-CSV)</span>
+              Source: <span class="font-numeric">Government of British Columbia population statistics portal; Quarterly population and migration estimates for B.C.</span>, <span class="font-numeric">Statistics Canada, Labour Force Survey (years 2019 - 2025)</span>, <span class="font-numeric">Statistics Canada, Table 14-10-0371-01, Job vacancies, payroll employees, and job vacancy rate by provinces and territories</span>
             </p>
 
             <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
               <p class="text-[11px] uppercase tracking-[0.08em] text-primary font-semibold">Executive Takeaway</p>
               <p class="text-sm mt-1 text-primary-ink">
-                Employment and unemployment are unevenly distributed across groups in 2025. Core-age workers account for the majority of employment and also the largest absolute number of unemployed persons, reflecting their scale in the labour force. Youth have a smaller employed base with a sizable unemployed count, consistent with weaker attachment at labour-market entry. Recent immigrants contribute materially to both employment and unemployment, consistent with integration frictions that can persist even when employment volumes are high.
+                Indexed trends show labour-market pressure and demographics moving differently over 2019-2025. The 65+ population rises steadily and materially faster than the 18-64 population index, indicating continued aging. Unemployment and vacancy rates both diverge from their 2019 baselines through the cycle, with unemployment rising in recent years while vacancy rates ease from their peak. Together, these patterns are consistent with cooler aggregate demand conditions alongside structural demographic pressure.
               </p>
               <p class="text-xs text-muted-ink mt-2">
-                Group definitions: Recent immigrants = landed within 10 years (IMMIG=1); Youth = 15-24; Core-age = 25-54; Older workers = 55+.
+                Index base year is 2019 (=100) for all four series.
+              </p>
+              <p class="text-xs text-muted-ink mt-1">
+                Population note: the 18-64 line is proxied with the available working-age (15-64) series in the source data.
               </p>
             </div>
           </section>
@@ -274,14 +253,11 @@
           <section class="bg-white border border-outline rounded-xl overflow-hidden mt-8">
             <div class="px-6 py-5 border-b border-outline">
               <h3 class="text-xl font-semibold">Labour Force Ages 55+: Annual Growth Decomposition</h3>
-              <p class="text-sm text-muted-ink mt-1">
-                Annual growth-rate view (2020-2025): employed 55+ and unemployed 55+ growth bars with labour force 55+ growth line.
-              </p>
             </div>
 
             <div id="chart-replacement-demand" class="h-[460px] w-full"></div>
             <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
-              Source: <span class="font-numeric">Labour Force Characteristics Total.csv</span>
+              Source: <span class="font-numeric">Statistics Canada, Table 14-10-0287-03, Labour force characteristics by province</span>
             </p>
 
             <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
@@ -301,18 +277,11 @@
           <header class="mb-8">
             <p class="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Program Analytics</p>
             <h2 class="text-3xl font-semibold mt-2">WorkBC Program Impacts</h2>
-            <p class="text-sm text-muted-ink mt-3 max-w-4xl">
-              Public indicators suggest shifts in likely service demand volume and complexity. This panel tracks core signal trends
-              relevant for program planning and resource allocation.
-            </p>
           </header>
 
           <section class="bg-white border border-outline rounded-xl overflow-hidden">
             <div class="px-6 py-5 border-b border-outline">
               <h3 class="text-xl font-semibold">WorkBC Program Demand Proxy Indicators, 2019-2025</h3>
-              <p class="text-sm text-muted-ink mt-1">
-                Annual indicator panel, 2019-2025.
-              </p>
             </div>
 
             <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -335,7 +304,7 @@
             </div>
 
             <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
-              Source: <span class="font-numeric">Labour Force Characteristics Total.csv</span>, <span class="font-numeric">LFS (2019-CSV to 2025-CSV)</span>
+              Source: <span class="font-numeric">Statistics Canada, Table 14-10-0287-03, Labour force characteristics by province</span>, <span class="font-numeric">Statistics Canada, Labour Force Survey (years 2019 - 2025)</span>
             </p>
 
             <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
@@ -351,15 +320,30 @@
 
           <section class="bg-white border border-outline rounded-xl overflow-hidden mt-8">
             <div class="px-6 py-5 border-b border-outline">
-              <h3 class="text-xl font-semibold">Industry Average Worker Age, 2025</h3>
-              <p class="text-sm text-muted-ink mt-1">
-                Horizontal ranking of industries by estimated average worker age (2025).
+              <h3 class="text-xl font-semibold">Program Pressure Signals: Unemployment, Youth Unemployment, and Vacancy Rate</h3>
+            </div>
+
+            <div id="chart-program-pressure-signals" class="h-[440px] w-full"></div>
+            <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
+              Source: <span class="font-numeric">Statistics Canada, Table 14-10-0287-03, Labour force characteristics by province</span>, <span class="font-numeric">Statistics Canada, Table 14-10-0371-01, Job vacancies, payroll employees, and job vacancy rate by provinces and territories</span>
+            </p>
+
+            <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
+              <p class="text-[11px] uppercase tracking-[0.08em] text-primary font-semibold">Executive Takeaway</p>
+              <p class="text-sm mt-1 text-primary-ink">
+                This combined view shows program pressure from both labour slack and hiring conditions. Unemployed persons and youth unemployment rate rise in recent years while vacancy rate eases from its peak, indicating softer aggregate demand conditions with continued entry-level stress.
               </p>
+            </div>
+          </section>
+
+          <section class="bg-white border border-outline rounded-xl overflow-hidden mt-8">
+            <div class="px-6 py-5 border-b border-outline">
+              <h3 class="text-xl font-semibold">Industry Average Worker Age, 2025</h3>
             </div>
 
             <div id="chart-industry-average-age" class="h-[560px] w-full"></div>
             <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
-              Source: <span class="font-numeric">Labour Force Characteristics Industries.csv</span>
+              Source: <span class="font-numeric">Statistics Canada, Table 14-10-0023-01, Labour force characteristics by industry</span>
             </p>
 
             <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
@@ -373,141 +357,8 @@
             </div>
           </section>
 
-          <section class="bg-white border border-outline rounded-xl overflow-hidden mt-8">
-            <div class="px-6 py-5 border-b border-outline">
-              <h3 class="text-xl font-semibold">Industry Labour Force Gender Gap, 2025</h3>
-              <p class="text-sm text-muted-ink mt-1">
-                Horizontal ranking from highest to lowest gender gap across industries.
-              </p>
-            </div>
-
-            <div id="chart-industry-gender-gap" class="h-[620px] w-full"></div>
-            <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
-              Source: <span class="font-numeric">Labour Force Characteristics Industries.csv</span>
-            </p>
-
-            <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
-              <p class="text-[11px] uppercase tracking-[0.08em] text-primary font-semibold">Executive Takeaway</p>
-              <p class="text-sm mt-1 text-primary-ink">
-                Gender concentration is large in a subset of industries and much smaller in others, indicating strong sector-level segmentation. In high-gap industries, the effective recruiting pool is structurally narrower, which can contribute to persistent vacancy pressure when demand rises. The ordering provides a clear map of where the gender distribution is most imbalanced and where targeted pipeline expansion would likely have the highest leverage.
-              </p>
-              <p class="text-xs text-muted-ink mt-2">
-                Gap metric: absolute difference between men+ and women+ labour-force shares within each industry (percentage points).
-              </p>
-            </div>
-          </section>
         </div>
 
-        <div id="tab-future" class="tab-panel hidden">
-          <header class="mb-8">
-            <p class="text-xs uppercase tracking-[0.2em] text-primary font-semibold">Forward Signals</p>
-            <h2 class="text-3xl font-semibold mt-2">Future Trends</h2>
-            <p class="text-sm text-muted-ink mt-3 max-w-4xl">
-              Strategic forward lens on migration composition and volatility to help leadership track turning points in labour-market
-              and service-demand conditions.
-            </p>
-          </header>
-
-          <section class="bg-white border border-outline rounded-xl overflow-hidden">
-            <div class="px-6 py-5 border-b border-outline">
-              <h3 class="text-xl font-semibold">BC Net Migration by Source, 2019-2025</h3>
-              <p class="text-sm text-muted-ink mt-1">
-                Net migration source split, annual 2019-2025.
-              </p>
-            </div>
-
-            <div id="chart-migration-source-split" class="h-[500px] w-full"></div>
-            <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
-              Source: <span class="font-numeric">Major data file.xlsx</span>
-            </p>
-
-            <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
-              <p class="text-[11px] uppercase tracking-[0.08em] text-primary font-semibold">Executive Takeaway</p>
-              <p class="text-sm mt-1 text-primary-ink">
-                Net migration composition shifts materially across 2019-2025. International migration and NPR change dominate the post-pandemic rebound, while interprovincial migration is smaller and more episodic. NPR change is the most volatile series and drives much of the year-to-year swing, including the 2025 reversal. This composition matters because volatility in the dominant component translates into volatility in net population growth.
-              </p>
-            </div>
-          </section>
-
-          <section class="bg-white border border-outline rounded-xl overflow-hidden mt-8">
-            <div class="px-6 py-5 border-b border-outline">
-              <h3 class="text-xl font-semibold">Labour Market and Service Demand Monitoring Indicators</h3>
-              <p class="text-sm text-muted-ink mt-1">
-                Annual monitoring panel (2019-2025) with directional status and sparkline trends.
-              </p>
-            </div>
-
-            <div class="p-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
-              <article class="border border-outline rounded-lg p-4">
-                <div class="flex items-center justify-between mb-2">
-                  <p class="text-xs uppercase tracking-[0.08em] text-muted-ink font-semibold">Interprovincial migration</p>
-                  <span id="status-interprov" class="text-xs font-semibold"></span>
-                </div>
-                <p id="value-interprov" class="font-numeric text-xl font-bold text-primary"></p>
-                <div id="spark-interprov" class="h-[88px] w-full mt-2"></div>
-              </article>
-
-              <article class="border border-outline rounded-lg p-4">
-                <div class="flex items-center justify-between mb-2">
-                  <p class="text-xs uppercase tracking-[0.08em] text-muted-ink font-semibold">Net NPR change</p>
-                  <span id="status-npr" class="text-xs font-semibold"></span>
-                </div>
-                <p id="value-npr" class="font-numeric text-xl font-bold text-primary"></p>
-                <div id="spark-npr" class="h-[88px] w-full mt-2"></div>
-              </article>
-
-              <article class="border border-outline rounded-lg p-4">
-                <div class="flex items-center justify-between mb-2">
-                  <p class="text-xs uppercase tracking-[0.08em] text-muted-ink font-semibold">Unemployment rate</p>
-                  <span id="status-unemp-rate" class="text-xs font-semibold"></span>
-                </div>
-                <p id="value-unemp-rate" class="font-numeric text-xl font-bold text-primary"></p>
-                <div id="spark-unemp-rate" class="h-[88px] w-full mt-2"></div>
-              </article>
-
-              <article class="border border-outline rounded-lg p-4">
-                <div class="flex items-center justify-between mb-2">
-                  <p class="text-xs uppercase tracking-[0.08em] text-muted-ink font-semibold">Job vacancy rate</p>
-                  <span id="status-vac-rate" class="text-xs font-semibold"></span>
-                </div>
-                <p id="value-vac-rate" class="font-numeric text-xl font-bold text-primary"></p>
-                <div id="spark-vac-rate" class="h-[88px] w-full mt-2"></div>
-              </article>
-
-              <article class="border border-outline rounded-lg p-4">
-                <div class="flex items-center justify-between mb-2">
-                  <p class="text-xs uppercase tracking-[0.08em] text-muted-ink font-semibold">EI beneficiaries proxy</p>
-                  <span id="status-ei-proxy" class="text-xs font-semibold"></span>
-                </div>
-                <p id="value-ei-proxy" class="font-numeric text-xl font-bold text-primary"></p>
-                <div id="spark-ei-proxy" class="h-[88px] w-full mt-2"></div>
-              </article>
-
-              <article class="border border-outline rounded-lg p-4">
-                <div class="flex items-center justify-between mb-2">
-                  <p class="text-xs uppercase tracking-[0.08em] text-muted-ink font-semibold">Recent immigrant employment rate</p>
-                  <span id="status-ri-er" class="text-xs font-semibold"></span>
-                </div>
-                <p id="value-ri-er" class="font-numeric text-xl font-bold text-primary"></p>
-                <div id="spark-ri-er" class="h-[88px] w-full mt-2"></div>
-              </article>
-            </div>
-
-            <p class="px-6 py-3 text-xs text-muted-ink border-t border-outline">
-              Source: <span class="font-numeric">Major data file.xlsx</span>, <span class="font-numeric">Job Vacancies.csv</span>, <span class="font-numeric">Labour Force Characteristics Total.csv</span>, <span class="font-numeric">LFS (2019-CSV to 2025-CSV)</span>
-            </p>
-
-            <div class="bg-takeaway-bg border-t border-outline px-6 py-4">
-              <p class="text-[11px] uppercase tracking-[0.08em] text-primary font-semibold">Executive Takeaway</p>
-              <p class="text-sm mt-1 text-primary-ink">
-                Read together, these indicators provide a compact cross-check across labour supply, labour demand, labour slack, and integration outcomes. When unemployment rises while the vacancy rate eases, the signal is broad cooling; when migration indicators move sharply, the signal is shifting supply pressure. Divergence across indicators is often more informative than any single metric, because it can indicate mismatch (for example, slack rising while demand remains elevated in specific segments). As a set, the panel supports clearer identification of turning points than any one series alone.
-              </p>
-              <p class="text-xs text-muted-ink mt-2">
-                EI regular beneficiaries are not present in the provided files; unemployment level is used as a proxy for claimant pressure.
-              </p>
-            </div>
-          </section>
-        </div>
       </main>
     </div>
 
